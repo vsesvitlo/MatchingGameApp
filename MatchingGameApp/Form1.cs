@@ -82,6 +82,8 @@ namespace MatchingGameApp
                 // ignore the click
                 if (clickedLabel.ForeColor == Color.Black)
                     return;
+                if (clickedLabel.ForeColor == Color.Orange)
+                    return;
 
                 // If firstClicked is null, this is the first icon 
                 // in the pair that the player clicked,
@@ -94,11 +96,36 @@ namespace MatchingGameApp
 
                     return;
                 }
+                else if (secondClicked == null)
+                {
+                    secondClicked = clickedLabel;
+                    secondClicked.ForeColor = Color.Black;
+
+
+                    if (firstClicked.Text != secondClicked.Text)
+                    {
+                        firstClicked.ForeColor = firstClicked.BackColor;
+                        secondClicked.ForeColor = secondClicked.BackColor;
+                        firstClicked = null;
+                        secondClicked = null;
+                    }
+                    else if (firstClicked.Text == secondClicked.Text)
+                    {
+                        firstClicked.ForeColor = Color.Orange;
+                        secondClicked.ForeColor = Color.Orange;
+                        firstClicked = null;
+                        secondClicked = null;
+                        return;
+                    }
+                }
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+
+        }
+       /* {
             // The timer is only on after two non-matching 
             // icons have been shown to the player, 
             // so ignore any clicks if the timer is running
@@ -139,7 +166,7 @@ namespace MatchingGameApp
                 // a second, and then hide the icons)
                 timer1.Start();
             }
-        }
+        }*/
     }
 
 }
